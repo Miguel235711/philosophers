@@ -1,14 +1,20 @@
-PImage philosopher, food, fork;
+PImage philo, food, fork;
 int suma, i;
-int tenedores[];
+
 boolean semaforo = false;
 
+fork[] forks;
+philosopher[] philosophers;
+
 void setup(){
-  size(600,650, P3D);
+  size(600,650, P2D);
   surface.setResizable(false); 
-  philosopher = loadImage("filosofo.png");
+  philo = loadImage("filosofo.png");
   food = loadImage("comida.png");
   fork = loadImage("fork.jpg");
+  
+  forks = new fork[5];
+  philosophers = new philosopher[5];
 }
 
 void draw(){
@@ -16,12 +22,17 @@ void draw(){
   
   fill(0,198,0);
   circle(width/2,height/2,300);
+    
   drawPhilosophers();
   drawFood();
   drawText();                                                                        //Los filosofos estan acomodados desde arriba en el sentido horario
     
-  
-   //thread("generateRandom");
+  for(int i = 0; i < 5; i++){
+    forks[i].forkDraw();
+    philosophers[i].philoDraw();
+  }
+    
+  //thread("generateRandom");
 }
 
 void drawSingleText(String content,int x,int y){
@@ -37,31 +48,31 @@ void drawText(){
 }
 
 void drawPhilosophers(){
-  image(philosopher, width/2-80 , height/2-300, 150, 150);              //Filosofo de hasta arriba 1 
-  image(philosopher, width/2+120, height/2-100, 150, 150);              //Filosofo 2
-  image(philosopher, width/2+20 , height/2+100 , 150, 150);              //Filosofo 3
-  image(philosopher, width/2-160, height/2+100 , 150, 150);              //Filosofo 4
-  image(philosopher, width/2-270, height/2-100, 150, 150);              //Filosofo 5
+  philosophers[0] = new philosopher(width/2-80, height/2-300);     //Filosofo de hasta arriba 1
+  philosophers[1] = new philosopher(width/2+120, height/2-100);    //Filosofo 2
+  philosophers[2] = new philosopher(width/2+20, height/2+100);     //Filosofo 3
+  philosophers[3] = new philosopher(width/2-160, height/2+100);    //Filosofo 4
+  philosophers[4] = new philosopher(width/2-270, height/2-100);    //Filosofo 5
 }
 
 int szFood=60;
-int wFork=20,hFork=40;
 
 void drawFood(){
-  image(fork,288, 380,wFork,hFork);
-  image(food, width/2-35 , height/2-140, szFood,szFood);
-  tint(228, 56, 56);
-  image(fork,395, 345,wFork,hFork);
-  noTint();
-  image(food, width/2+80, height/2-35,szFood, szFood);
-  image(fork,180, 340,wFork,hFork);
-  image(food, width/2+20 , height/2+60 , szFood, szFood);
-  tint(228, 56, 56);
-  image(fork,380, 200,wFork,hFork);
-  noTint();
-  image(food, width/2-85, height/2+60 , szFood, szFood);
-  image(fork,200, 200,wFork,hFork);
-  image(food, width/2-140, height/2-35, szFood, szFood);
+   forks[0] = new fork(288, 380);
+   image(food, width/2-35 , height/2-140, szFood,szFood);
+   tint(228, 56, 56);
+   forks[1] = new fork(395, 345);
+   noTint();
+   image(food, width/2+80, height/2-35,szFood, szFood);
+   forks[2] = new fork(180, 340);
+   image(food, width/2+20 , height/2+60 , szFood, szFood);
+   tint(228, 56, 56);
+   forks[3] = new fork(380, 200);
+   noTint();
+   image(food, width/2-85, height/2+60 , szFood, szFood);
+   forks[4] = new fork(200, 200);
+   image(food, width/2-140, height/2-35, szFood, szFood);
+  
 }
 
 /*void generateRandom(){
