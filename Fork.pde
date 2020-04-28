@@ -1,14 +1,10 @@
-public class fork{
-   
-  int wFork=20,hFork=40, x, y;
-  
+public class fork extends Drawing{
   public fork(int x, int y){
-    this.x = x;
-    this.y = y;
+    super(fork,x,y,20,40);
   }
- 
-  public void forkDraw(){
-    image(fork, x, y, wFork, hFork);
+  public void drawWithTint(){
+    tint(228, 56, 56);
+    draw();
+    noTint();
   }
-  
 }
